@@ -9,21 +9,21 @@ const App = () => {
     {
       name: 'Fundamentals of React',
       exercises: 10
-  },
-  { 
-      name:'Using props to pass data',
-      exercises2: 7
-  },
-  {
+    },
+    {
+      name: 'Using props to pass data',
+      exercises: 7
+    },
+    {
       name: 'State of a component',
-      exercises3: 14
-  }
-]
+      exercises: 14
+    }
+  ]
   return (
     <div>
       <Header course={course} />
-      <Content parts={parts}  />
-      <Total parts = {parts} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   );
 };
