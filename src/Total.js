@@ -1,6 +1,7 @@
 import React from "react";
 
 const Total = (props) => {
+    console.log(props)
 	return (
 		<footer>
 			<p>
