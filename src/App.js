@@ -1,24 +1,33 @@
-import React from 'react'
-
-const Hello = (props) => {
-  return (
-    <div><p>Hello {props.name}, I love my fish and cats for {props.year} year</p>
-    </div>
-  )
-}
+import React from 'react';
+import Header from "./Header";
+import Content from "./Content";
+import Total from "./Total";
 
 const App = () => {
-  const name = "Sophie"
-  const year = 2
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
+  const exercises1 = 10
+  const part2 = 'Using props to pass data'
+  const exercises2 = 7
+  const part3 = 'State of a component'
+  const exercises3 = 14
+
   return (
-    <div>
-      <h1>Greetings</h1>
-      <Hello name="Chris" year="forever" />
-      <Hello name="Pocky" year={year}/>
-      <Hello name="Bru" year={year +1000} />
-    </div>
-  )
-}
+    <>
+      <Header course={course} />
+      <Content
+          part1={part1} exercises1={exercises1}
+          part2={part2} exercises2={exercises2}
+          part3={part3} exercises3={exercises3}
+      />
+      <Total
+          exercises1={exercises1}
+          exercises2={exercises2}
+          exercises3={exercises3}
+        />
+    </>
+  );
+};
 
-export default App;
 
+export default App
