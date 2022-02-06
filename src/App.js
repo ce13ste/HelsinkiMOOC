@@ -1,86 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const StatisticsLine = ({text, value}) => {
-  return (
-    <tr>
-    <td>{text}</td>
-    <td>{value}</td>
-  </tr>
-  );
-};
-
-const Statistics = (props) => {
-  const values = props.values;
-  if (values.total) {
-    return (
-      <table>
-        <tbody>
-        <StatisticsLine text={"Good"} value={values.good}/>
-        <StatisticsLine text={"Neutral"} value={values.neutral}/>
-        <StatisticsLine text={"Bad"} value={values.bad}/>
-        <StatisticsLine text={"All"} value={values.total}/>
-        <StatisticsLine text={"Average"} value={values.average}/>
-        <StatisticsLine text={"Positive"} value={`${values.positive}%`}/>
-        </tbody>
-      </table>
-    );
-  } else {
-    return <p>No feedback given</p>
-  }
-};
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [score, setScore] = useState(0);
-  const [average, setAverage] = useState(0);
-  const [positive, setPositive] = useState(0);
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
+  ]
+   
+  const [selected, setSelected] = useState(0)
 
-  const Button = ({ text, handleClick }) => {
-    return <button onClick={handleClick}>{text}</button>;
-  };
-
-  const clickGood = () => {
-    setGood(good + 1);
-    setTotal(total + 1);
-    setScore(score + 1);
-    setAverage((score + 1) / (total + 1));
-    setPositive(((good + 1)/ (total + 1)) * 100);
-  };
-
-  const clickNeutral = () => {
-    setNeutral(neutral + 1);
-    setTotal(total + 1);
-    setScore(score);
-    setAverage(score / (total + 1));
-    setPositive((good / (total + 1)) * 100);
-  };
-
-  const clickBad = () => {
-    setBad(bad + 1);
-    setTotal(total + 1);
-    setScore(score - 1);
-    setAverage((score - 1) / (total + 1));
-    setPositive(((good) / (total + 1)) * 100);
-  };
+  const getRandom = (min, max) => () => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    const num = Math.floor(Math.random() * (max - min) + min);
+    setSelected(num);
+  }
 
   return (
-    <main>
-      <h1>Please provide your feedback:</h1>
-      <Button handleClick={clickGood} text='Good' />
-      <Button handleClick={clickNeutral} text='Neutral' />
-      <Button handleClick={clickBad} text='Bad' />
-      <h1>Statistics</h1>
-      <Statistics values={{ good, neutral, bad, total, average, positive }} />
-    </main>
+    <>
+      <div>{anecdotes[selected]}</div>
+      <button onClick={getRandom(0, 6)}>next anecdote</button>
+    </>
   )
-
 }
 
 export default App
-
-
-
-
