@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 
+const StatisticsLine = ({text, value}) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
+};
+
 const Statistics = (props) => {
   const values = props.values;
   if (values.total) {
     return (
       <div>
-        <h1>Statistics</h1>
-        <p>Good {values.good}</p>
-        <p>Neutral {values.neutral}</p>
-        <p>Bad {values.bad}</p>
-        <p>All {values.total}</p>
-        <p>Average {values.average}</p>
-        <p>Positive {values.positive}%</p>
+        <StatisticsLine text={"Good"} value={values.good}/>
+        <StatisticsLine text={"Neutral"} value={values.neutral}/>
+        <StatisticsLine text={"Bad"} value={values.bad}/>
+        <StatisticsLine text={"All"} value={values.total}/>
+        <StatisticsLine text={"Average"} value={values.average}/>
+        <StatisticsLine text={"Positive"} value={values.positive}/>
       </div>
     );
   } else {
@@ -62,7 +69,7 @@ const App = () => {
       <Button handleClick={clickGood} text='Good' />
       <Button handleClick={clickNeutral} text='Neutral' />
       <Button handleClick={clickBad} text='Bad' />
-      <h1>statistics</h1>
+      <h1>Statistics</h1>
       <Statistics values={{ good, neutral, bad, total, average, positive }} />
     </main>
   )
