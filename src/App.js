@@ -5,9 +5,15 @@ const App = () => {
 	console.log("app");
 	const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-1234567", id: 1 },
+    { name: "Ada Lovelace", number: "040-125415647", id: 2 },
+    { name: "Brubru Ng", number: "055-000651351", id: 3 },
+    { name: "Pocky Ng", number: "550-4564127", id: 4 },
+    { name: "Fish Ng", number: "652-124518", id: 5 },
+
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [filter, setFilter] = useState("");
 
 	const addName = () => {
 		const nameObject = {
@@ -29,7 +35,14 @@ const App = () => {
 		setNewNumber(event.target.value);
   };
 
+  const updateFilter = (event) => {
+		setFilter(event.target.value);
+  };
   
+  const filteredNames = persons.filter(
+    (person) => person.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
+  );
+
   const checkExists = (event) => {
     event.preventDefault();
 
@@ -43,6 +56,10 @@ const App = () => {
 	return (
 		<div>
 			<h2>Phonebook</h2>
+      <div>
+          filter shown with: <input value={filter} onChange={updateFilter} />
+        </div>
+      <h2>add a new</h2>
 			<form onSubmit={checkExists}>
 				<div>
           name: <input value={newName} onChange={updateName} />
@@ -54,7 +71,7 @@ const App = () => {
 			</form>
 			<h2>Numbers</h2>
 			<ul>
-				{persons.map(person => (
+				{filteredNames.map(person => (
 					<Name key={person.id} person={person} />
           
 				))}
